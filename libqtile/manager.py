@@ -277,6 +277,7 @@ class Qtile(command.CommandObject):
         self._eventloop = asyncio.new_event_loop()
         self._eventloop.add_signal_handler(signal.SIGINT, self.stop)
         self._eventloop.add_signal_handler(signal.SIGTERM, self.stop)
+        self._eventloop.add_signal_handler(signal.SIGUSR1, self.cmd_restart)
         self._eventloop.set_exception_handler(
             lambda x, y: logger.exception("Got an exception in poll loop")
         )
